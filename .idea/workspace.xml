@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d309174-84ac-4065-bb5a-23378458b860" name="Default Changelist" comment="travis and codecov">
+    <list default="true" id="1d309174-84ac-4065-bb5a-23378458b860" name="Default Changelist" comment="correct">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job4j_threads.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +33,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="org.infernus.idea.checkstyle.CheckStyleConfigurable" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -43,7 +47,7 @@
       <recent name="C:\projects\job4j_threads\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Wget">
+  <component name="RunManager" selected="Application.ThreadState">
     <configuration name="ConcurrentOutput" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.job4j.concurrent.ConcurrentOutput" />
       <module name="job4j_threads" />
@@ -96,22 +100,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ThreadState" />
         <item itemvalue="Application.Wget" />
         <item itemvalue="Application.ThreadSleep" />
-        <item itemvalue="Application.ThreadState" />
         <item itemvalue="Application.ConcurrentOutput" />
       </list>
     </recent_temporary>
@@ -124,7 +117,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637232354811</updated>
-      <workItem from="1637232356345" duration="5692000" />
+      <workItem from="1637232356345" duration="6969000" />
+      <workItem from="1637239454474" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="1.1. Состояние нити. [#229175]">
       <created>1637235114043</created>
@@ -175,7 +169,28 @@
       <option name="project" value="LOCAL" />
       <updated>1637237689239</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="travis and codecov">
+      <created>1637238176296</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1637238176296</updated>
+    </task>
+    <task id="LOCAL-00009" summary="correct">
+      <created>1637238458342</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637238458342</updated>
+    </task>
+    <task id="LOCAL-00010" summary="correct">
+      <created>1637239606407</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1637239606407</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,11 +206,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.1. Состояние нити. [#229175]" />
     <MESSAGE value="1.2. Режим ожидания. [#231217]" />
     <MESSAGE value="travis and codecov" />
-    <option name="LAST_COMMIT_MESSAGE" value="travis and codecov" />
+    <MESSAGE value="correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct" />
   </component>
 </project>
