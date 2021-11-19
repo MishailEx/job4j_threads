@@ -1,25 +1,15 @@
 package ru.job4j.concurrent;
 
+import java.util.List;
+
 public class ConsoleProgress implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                String symbol;
-                for (int i = 0; true; i++) {
-                    switch (i) {
-                        case (1):
-                            symbol = "|";
-                            break;
-                        case (2):
-                            symbol = "\\";
-                            break;
-                        default:
-                            symbol = "/";
-                            i = 0;
-                            break;
-                    }
-                    System.out.print("\r load: " + "Loading ..." + symbol);
+                List<String> symbol = List.of("|", "\\", "/");
+                for (String str: symbol) {
+                    System.out.print("\r load: " + "Loading ..." + str);
                     Thread.sleep(500);
                 }
             } catch (InterruptedException e) {
@@ -32,7 +22,7 @@ public class ConsoleProgress implements Runnable {
     public static void main(String[] args) throws InterruptedException {
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         progress.interrupt();
     }
 
