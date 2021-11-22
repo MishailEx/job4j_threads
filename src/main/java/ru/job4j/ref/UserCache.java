@@ -23,7 +23,7 @@ public class UserCache {
 
     public List<User> findAll() {
         List<User> deepCopy = new ArrayList<>();
-        for(Integer key : users.keySet()) {
+        for (Integer key : users.keySet()) {
             deepCopy.add(User.of(users.get(key).getName()));
         }
         return deepCopy;
