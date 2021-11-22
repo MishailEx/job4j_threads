@@ -4,6 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,6 +22,10 @@ public class UserCache {
     }
 
     public List<User> findAll() {
-        return new ArrayList<>(users.values());
+        List<User> deepCopy = new ArrayList<>();
+        for(Integer key : users.keySet()) {
+            deepCopy.add(User.of(users.get(key).getName()));
+        }
+        return deepCopy;
     }
 }
