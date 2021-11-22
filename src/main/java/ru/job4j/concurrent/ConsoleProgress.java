@@ -5,10 +5,10 @@ import java.util.List;
 public class ConsoleProgress implements Runnable {
     @Override
     public void run() {
+        List<String> symbol = List.of("|", "\\", "/");
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                List<String> symbol = List.of("|", "\\", "/");
-                for (String str: symbol) {
+                for (String str : symbol) {
                     System.out.print("\r load: " + "Loading ..." + str);
                     Thread.sleep(500);
                 }
