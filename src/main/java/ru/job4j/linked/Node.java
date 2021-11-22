@@ -15,7 +15,7 @@ public final class Node<T> {
     }
 
     public Node<T> getNext() {
-        return next;
+        return new Node<>(next.getNext(), next.getValue());
     }
 
     public T getValue() {
