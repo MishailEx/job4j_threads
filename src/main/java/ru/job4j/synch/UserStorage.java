@@ -25,14 +25,12 @@ public class UserStorage {
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
         boolean rsl = false;
-        if (!validate(fromId) || !validate(toId)) {
-            throw new IllegalArgumentException();
-        }
-        if (map.get(fromId).getAmount() >= amount) {
-            map.get(toId).setAmount(map.get(toId).getAmount() + amount);
-            rsl = true;
-        } else {
-            System.out.println("not enough money");
+        if (map.get(fromId) != null && map.get(toId) != null) {
+            if (map.get(fromId).getAmount() >= amount) {
+                map.get(toId).setAmount(map.get(toId).getAmount() + amount);
+                map.get(fromId).setAmount(map.get(fromId).getAmount() - amount);
+                rsl = true;
+            }
         }
         return rsl;
     }
