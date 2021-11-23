@@ -3,7 +3,6 @@ package ru.job4j.concurrent;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -13,8 +12,22 @@ public class SimpleBlockingQueueTest {
     public void whenOfferAndPoll() throws InterruptedException {
         List<Integer> num = new ArrayList<>();
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(10);
-        Thread producer = new Thread(() -> IntStream.range(0, 3).forEach(queue::offer));
-        Thread consumer = new Thread(() -> num.add(queue.poll()));
+        Thread producer = new Thread(() -> {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    queue.offer(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Thread consumer = new Thread(() -> {
+            try {
+                num.add(queue.poll());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
         producer.start();
         consumer.start();
         producer.join();
@@ -26,10 +39,22 @@ public class SimpleBlockingQueueTest {
     public void whenFullCapacity() throws InterruptedException {
         List<Integer> num = new ArrayList<>();
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(2);
-        Thread producer = new Thread(() -> IntStream.range(0, 5).forEach(queue::offer));
+        Thread producer = new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    queue.offer(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         Thread consumer = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
-                num.add(queue.poll());
+                try {
+                    num.add(queue.poll());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         producer.start();
