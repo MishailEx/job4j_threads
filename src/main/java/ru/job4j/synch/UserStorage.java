@@ -3,39 +3,24 @@ package ru.job4j.synch;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @ThreadSafe
 public class UserStorage {
     @GuardedBy("this")
-    private final Map<Integer, User> map = new ConcurrentHashMap<>();
+    private final Map<Integer, User> map = new HashMap<>();
 
     public synchronized boolean add(User user) {
-        boolean rsl = false;
-        if (!validate(user.getId())) {
-            map.put(user.getId(), user);
-            rsl = true;
-        }
-        return rsl;
+        return map.putIfAbsent(user.getId(), user) == null;
     }
 
     public synchronized boolean update(User user) {
-        boolean rsl = false;
-        if (validate(user.getId())) {
-            map.get(user.getId()).setAmount(user.getAmount());
-            rsl = true;
-        }
-        return rsl;
+        return map.replace(user.getId(), map.get(user.getId()), user);
     }
 
     public synchronized boolean delete(User user) {
-        boolean rsl = false;
-        if (validate(user.getId())) {
-            map.remove(user.getId());
-            rsl = true;
-        }
-        return rsl;
+        return map.remove(user.getId(), map.get(user.getId()));
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
@@ -61,6 +46,5 @@ public class UserStorage {
         storage.add(new User(1, 100));
         storage.add(new User(2, 200));
         System.out.println(storage.transfer(1, 2, 50));
-
     }
 }
