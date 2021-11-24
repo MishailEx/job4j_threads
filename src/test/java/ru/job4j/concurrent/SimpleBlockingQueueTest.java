@@ -63,4 +63,35 @@ public class SimpleBlockingQueueTest {
         consumer.join();
         assertThat(num, is(List.of(0, 1, 2, 3, 4)));
     }
+
+    @Test
+    public void whenMakeAllAndGetAll() throws InterruptedException {
+        List<Integer> num = new ArrayList<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue(2);
+        Thread producer = new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    queue.offer(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Thread consumer = new Thread(() -> {
+            while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+                try {
+                    num.add(queue.poll());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+        producer.start();
+        consumer.start();
+        producer.join();
+        consumer.interrupt();
+        consumer.join();
+        assertThat(num, is(List.of(0, 1, 2, 3, 4)));
+    }
 }
