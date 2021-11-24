@@ -16,9 +16,7 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     public synchronized void add(T value) {
-        if (!list.contains(value)) {
             list.add(value);
-        }
     }
 
     public synchronized T get(int index) {
@@ -31,6 +29,6 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     private synchronized List<T> copy(List<T> array) {
-        return (List<T>) new ArrayList<>(array).clone();
+        return new ArrayList<>(array);
     }
 }
