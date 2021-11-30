@@ -13,9 +13,12 @@ public class ThreadPool {
         for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
             Thread tmp = new Thread(() -> {
                 try {
-                    tasks.poll().run();
+                    while (true) {
+                        tasks.poll().run();
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
             });
             tmp.start();
@@ -28,7 +31,7 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        for (Thread thread: threads) {
+        for (Thread thread : threads) {
             thread.interrupt();
         }
     }
