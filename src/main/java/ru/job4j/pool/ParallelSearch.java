@@ -8,7 +8,7 @@ public class ParallelSearch extends RecursiveTask<Integer> {
     private final int[] array;
     private final int from;
     private final int to;
-    private int numSearch;
+    private final int numSearch;
 
     public ParallelSearch(int[] array, int from, int to, int numSearch) {
         this.array = array;
@@ -19,35 +19,28 @@ public class ParallelSearch extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if (to - from > 10) {
-            int mid = (from + to) / 2;
-            ParallelSearch task1 = new ParallelSearch(array, from, mid, numSearch);
-            ParallelSearch task2 = new ParallelSearch(array, mid + 1, to, numSearch);
-            task1.fork();
-            task2.fork();
-            int left = task1.join();
-            int right = task2.join();
-            return Math.max(left, right);
-        } else {
+        if (to - from <= 10) {
             return search();
         }
-  }
+        int mid = (from + to) / 2;
+        ParallelSearch task1 = new ParallelSearch(array, from, mid, numSearch);
+        ParallelSearch task2 = new ParallelSearch(array, mid + 1, to, numSearch);
+        task1.fork();
+        task2.fork();
+        int left = task1.join();
+        int right = task2.join();
+        return Math.max(left, right);
+    }
 
     private Integer search() {
         int index = -1;
         for (int i = from; i <= to; i++) {
             if (array[i] == numSearch) {
                 index = i;
+                break;
             }
         }
         return index;
-    }
-
-    public static void main(String[] args) {
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
-        int a = forkJoinPool.invoke(new ParallelSearch(
-                ParallelSearch.getInitArray(100), 0, 99, 63));
-        System.out.println(a);
     }
 
     public static int[] getInitArray(int capacity) {
@@ -56,5 +49,10 @@ public class ParallelSearch extends RecursiveTask<Integer> {
             array[i] = i;
         }
         return array;
+    }
+
+    public static int searchIndex(int[] array, int from, int to, int numSearch) {
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        return forkJoinPool.invoke(new ParallelSearch(array, from, to, numSearch));
     }
 }
