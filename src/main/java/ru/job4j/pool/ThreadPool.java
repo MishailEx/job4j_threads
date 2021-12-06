@@ -13,7 +13,7 @@ public class ThreadPool {
         for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
             Thread tmp = new Thread(() -> {
                 try {
-                    while (true) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         tasks.poll().run();
                     }
                 } catch (InterruptedException e) {
